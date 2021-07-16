@@ -22,4 +22,5 @@ sqlparse
 urllib3
 psycopg2-binary
 django-debug-toolbar
+django-debug-toolbar-template-profiler
 
