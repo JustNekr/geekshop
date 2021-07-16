@@ -1,6 +1,6 @@
 [
   {
-    "category": 1,
+    "category": "дом",
     "name": "Диван",
     "image": "products_images/product-3-sm.jpg",
     "short_desc": "диван как диван",
@@ -10,7 +10,7 @@
     "is_active": true
   },
   {
-    "category": 1,
+    "category": "дом",
     "name": "парные кресла",
     "image": "products_images/product-2.jpg",
     "short_desc": "почему бы и нет",
@@ -20,7 +20,7 @@
     "is_active": true
   },
   {
-    "category": 3,
+    "category": "модерн",
     "name": "Лампа",
     "image": "products_images/product-11.jpg",
     "short_desc": "похоже на модерн",
@@ -30,7 +30,7 @@
     "is_active": true
   },
   {
-    "category": 4,
+    "category": "классика",
     "name": "Люстра-ЛОФТ",
     "image": "products_images/product-5-sm.jpg",
     "short_desc": "вещи из хлама",
@@ -40,7 +40,7 @@
     "is_active": true
   },
   {
-    "category": 1,
+    "category": "дом",
     "name": "ступа",
     "image": "products_images/product-51.jpg",
     "short_desc": "толочь не перетолочь",
@@ -50,7 +50,7 @@
     "is_active": true
   },
   {
-    "category": 3,
+    "category": "модерн",
     "name": "лампа настольная",
     "image": "products_images/product-1.jpg",
     "short_desc": "",
@@ -60,7 +60,7 @@
     "is_active": true
   },
   {
-    "category": 4,
+    "category": "классика",
     "name": "светильник",
     "image": "products_images/product-41.jpg",
     "short_desc": "светит",
@@ -70,7 +70,7 @@
     "is_active": true
   },
   {
-    "category": 1,
+    "category": "дом",
     "name": "чайник",
     "image": "products_images/product-3.jpg",
     "short_desc": "",
@@ -80,7 +80,7 @@
     "is_active": true
   },
   {
-    "category": 2,
+    "category": "офис",
     "name": "стул мягенький)",
     "image": "products_images/product-4.jpg",
     "short_desc": "такой лучше в офис1",
@@ -90,7 +90,7 @@
     "is_active": true
   },
   {
-    "category": 1,
+    "category": "дом",
     "name": "Камень со стрелками",
     "image": "products_images/product-4-sm.jpg",
     "short_desc": "",
@@ -100,7 +100,7 @@
     "is_active": true
   },
   {
-    "category": 3,
+    "category": "модерн",
     "name": "слоновая кость",
     "image": "products_images/product-21.jpg",
     "short_desc": "вот",
@@ -110,7 +110,7 @@
     "is_active": true
   },
   {
-    "category": 3,
+    "category": "модерн",
     "name": "Светильник",
     "image": "products_images/product-31.jpg",
     "short_desc": "Весьма элегантный",
@@ -120,7 +120,7 @@
     "is_active": true
   },
   {
-    "category": 1,
+    "category": "дом",
     "name": "Ваза",
     "image": "products_images/product-61.jpg",
     "short_desc": "",
@@ -130,27 +130,7 @@
     "is_active": true
   },
   {
-    "category": 5,
-    "name": "erterter",
-    "image": "",
-    "short_desc": "",
-    "description": "",
-    "price": "0.00",
-    "quantity": 0,
-    "is_active": true
-  },
-  {
-    "category": 6,
-    "name": "35345345",
-    "image": "",
-    "short_desc": "",
-    "description": "",
-    "price": "0.00",
-    "quantity": 0,
-    "is_active": true
-  },
-  {
-    "category": 2,
+    "category": "офис",
     "name": "sdfsdfsfs",
     "image": "",
     "short_desc": "sdfsdfsd",
@@ -160,7 +140,7 @@
     "is_active": true
   },
   {
-    "category": 2,
+    "category": "офис",
     "name": "123",
     "image": "",
     "short_desc": "123",

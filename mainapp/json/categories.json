@@ -19,10 +19,5 @@
     "name": "классика",
     "description": "",
     "is_active": true
-  },
-  {
-    "name": "кукиш",
-    "description": "",
-    "is_active": true
   }
 ]
