@@ -85,7 +85,7 @@ class OrderCreate(DispatchMixin, FormValidMixin, CreateView):
         return data
 
 
-class OrderRead(DetailView):
+class OrderRead(DispatchMixin, DetailView):
     model = Order
     extra_context = {'title': 'Просмотр заказа'}
 
