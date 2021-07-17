@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.dispatch import receiver
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, HttpResponseRedirect
@@ -6,6 +7,7 @@ from django.db import transaction
 from django.db.models.signals import pre_save, pre_delete
 
 from django.forms import inlineformset_factory
+from django.utils.decorators import method_decorator
 
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
@@ -35,7 +37,13 @@ class FormValidMixin:
         return super().form_valid(form)
 
 
-class OrderList(FormValidMixin, ListView):
+class DispatchMixin:
+    @method_decorator(login_required())
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+
+class OrderList(DispatchMixin, FormValidMixin, ListView):
     model = Order
     extra_context = {'title': 'Список заказов'}
 
@@ -43,7 +51,7 @@ class OrderList(FormValidMixin, ListView):
         return Order.objects.filter(user=self.request.user)
 
 
-class OrderCreate(FormValidMixin, CreateView):
+class OrderCreate(DispatchMixin, FormValidMixin, CreateView):
     model = Order
     fields = []
     success_url = reverse_lazy('order:list')
@@ -82,7 +90,7 @@ class OrderRead(DetailView):
     extra_context = {'title': 'Просмотр заказа'}
 
 
-class OrderUpdate(FormValidMixin, UpdateView):
+class OrderUpdate(DispatchMixin, FormValidMixin, UpdateView):
     model = Order
     fields = []
     success_url = reverse_lazy('order:list')
@@ -104,7 +112,7 @@ class OrderUpdate(FormValidMixin, UpdateView):
         return data
 
 
-class OrderDelete(DeleteView):
+class OrderDelete(DispatchMixin, DeleteView):
     model = Order
     success_url = reverse_lazy('order:list')
     extra_context = {'title': 'Удаление заказа'}

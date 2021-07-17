@@ -31,10 +31,6 @@ class UsersListView(DispatchMixin, ListView):
     #     context['title'] = 'админка/пользователи'
     #     return context
 
-    @method_decorator(user_passes_test(lambda u: u.is_superuser))
-    def dispatch(self, *args, **kwargs):
-        return super().dispatch(*args, **kwargs)
-
 
 class UserCreateView(DispatchMixin, CreateView):
     model = ShopUser
