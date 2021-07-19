@@ -35,7 +35,7 @@ class Order(models.Model):
                               max_length=3,
                               choices=ORDER_STATUS_CHOICES,
                               default=FORMING)
-    is_active = models.BooleanField(verbose_name='активен', default=True)
+    is_active = models.BooleanField(verbose_name='активен', default=True, db_index=True)
 
     class Meta:
         ordering = ('-created',)

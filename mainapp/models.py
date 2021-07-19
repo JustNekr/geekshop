@@ -13,7 +13,8 @@ class ProductCategory(models.Model):
     )
     is_active = models.BooleanField(
         default=True,
-        verbose_name='активный'
+        verbose_name='активный',
+        db_index=True,
     )
 
     def __str__(self):
@@ -51,7 +52,8 @@ class Product(models.Model):
     )
     is_active = models.BooleanField(
         default=True,
-        verbose_name='активный'
+        verbose_name='активный',
+        db_index=True,
     )
 
     def __str__(self):
