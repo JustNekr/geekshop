@@ -4,6 +4,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.core.mail import send_mail
 from django.shortcuts import render, HttpResponseRedirect
 from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import UpdateView, CreateView
 
 from authapp.forms import ShopUserLoginForm, ShopUserRegisterForm, ShopUserEditForm, ShopUserProfileEditForm
@@ -13,6 +14,7 @@ from django.urls import reverse, reverse_lazy
 from authapp.models import ShopUser
 
 
+@csrf_exempt
 class MyLoginView(LoginView):
     authentication_form = ShopUserLoginForm
     template_name = 'authapp/login.html'
