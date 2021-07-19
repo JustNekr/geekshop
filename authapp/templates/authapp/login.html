@@ -10,7 +10,8 @@
         {% else %}
             <input type="hidden" name="next" value="{% url 'index' %}">
         {% endif %}
-        {{ form.as_p }}
+{#        {{ form.as_p }}#}
+        {{ login_form.as_p }}
         <br>
         <input class="form-control" type="submit" value="войти">
     </form>
