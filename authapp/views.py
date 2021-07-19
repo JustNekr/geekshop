@@ -14,11 +14,14 @@ from django.urls import reverse, reverse_lazy
 from authapp.models import ShopUser
 
 
-@csrf_exempt
 class MyLoginView(LoginView):
     authentication_form = ShopUserLoginForm
     template_name = 'authapp/login.html'
     extra_context = {'title': 'вход'}
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 
 class MyLogoutView(LogoutView):
