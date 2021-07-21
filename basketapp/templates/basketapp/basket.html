@@ -12,13 +12,11 @@
 {% endblock %}
 
 {% block content %}
-  <div class="basket_list">
-    {% include 'basketapp/inc/inc_basket_list.html' %}
-  </div>
-  <button class="btn btn-primary">
-    <a href="{% url 'index' %}">
-      на главную
+    <div class="basket_list">
+        {% include 'basketapp/inc/inc_basket_list.html' %}
+    </div>
+    <a href="{% url 'index' %}" class="btn btn-primary">
+        на главную
     </a>
-  </button>
 {% endblock %}
 
