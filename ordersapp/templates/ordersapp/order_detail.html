@@ -8,7 +8,9 @@
        {% for item in object.orderitems.select_related %}
            <div class="basket_record">
                <img src="{{ item.product.image|media_folder_products }}"
-                    alt="{{ item.product.short_desc }}">
+                    alt="{{ item.product.short_desc }}"
+                    style="width: 270px;"
+               >
                <span class="category_name">
                    {{ item.product.category.name }}
                </span>
