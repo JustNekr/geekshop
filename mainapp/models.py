@@ -1,3 +1,5 @@
+from functools import cached_property
+
 from django.db import models
 
 
@@ -60,5 +62,6 @@ class Product(models.Model):
         return f"{self.name} ({self.category.name})"
 
     @staticmethod
+    @cached_property
     def get_items():
-        return Product.objects.filter(is_active=True).order_by('category', 'name')
+        return Product.objects.filter(is_active=True).order_by('category', 'name').select_related()
