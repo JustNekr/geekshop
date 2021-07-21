@@ -16,7 +16,8 @@
             {% for item in basket_items %}
                 <tr>
                     <th scope="col">
-                        <img src="/media/{{ item.product.image }}" style="height: 50px;" alt="{{ item.product.short_desc }}">
+                        <img src="/media/{{ item.product.image }}" style="height: 100px;" alt="{
+                        { item.product.short_desc }}">
                     </th>
                     <td>
                         <span class="category_name">{{ item.product.category.name }}</span>
