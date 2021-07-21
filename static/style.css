@@ -73,7 +73,6 @@ html, body {
 
 .search {
 	display: block;
-	position: absolute;
 	width: 23px;
 	height: 23px;	
 	background-image: url(/static/img/search.png);
@@ -83,7 +82,6 @@ html, body {
 .basket {
     background-size: 100%;
 	display: block;
-	position: absolute;
 	width: 23px;
 	height: 23px;	
 	background-image: url(/static/img/basket.png);
