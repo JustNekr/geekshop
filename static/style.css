@@ -355,6 +355,7 @@ html, body {
 	margin-right: 15px;
 }
 .title h2 {
+	display: contents;
 	float: left;
 	margin-top: 118px;
 	color:  #212121;
@@ -1084,6 +1085,7 @@ td:first-child {
 }
 .category-products{
     display: flex;
+	justify-content: space-between;
 }
 .products_list{
     display: flex;
