@@ -716,6 +716,7 @@ td:first-child {
 }
 
 .location {
+	display: flex;
 	padding: 0px 97px;
 }
 .location-1 {
