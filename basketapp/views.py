@@ -15,6 +15,7 @@ class BasketView(ListView):
     template_name = 'basketapp/basket.html'
     context_object_name = 'basket_items'
     ordering = 'product__price'
+    extra_context = {'title': 'корзина'}
 
     def get_queryset(self):
         return super(BasketView, self).get_queryset().filter(user=self.request.user)
