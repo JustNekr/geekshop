@@ -24,11 +24,6 @@ class BasketView(ListView):
     def dispatch(self, *args, **kwargs):
         return super(BasketView, self).dispatch(*args, **kwargs)
 
-    def get_context_data(self, **kwargs):
-        context = super(BasketView, self).get_context_data(**kwargs)
-        context['title'] = 'категории/редактирование'
-        return context
-
 
 @login_required
 def basket_add(request, pk):
