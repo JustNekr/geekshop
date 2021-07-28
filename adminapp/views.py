@@ -1,4 +1,7 @@
 from django.contrib.auth.decorators import user_passes_test
+from django.db import connection
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 from django.shortcuts import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404, render
@@ -122,7 +125,7 @@ class ProductsListView(DispatchMixin, ListView):
     context_object_name = 'objects'
     ordering = ('-is_active', 'name')
     paginate_by = 3
-    extra_context = {'title': 'админка/продукт'}
+    extra_context = {'title': 'админка/продукты'}
 
     def get_queryset(self):
         queryset = super(ProductsListView, self).get_queryset()
@@ -184,3 +187,19 @@ class ProductDeleteView(DeleteView):
     def get_success_url(self):
         return reverse_lazy('admin_staff:products', kwargs={'pk': self.object.category_id})
 
+
+# def db_profile_by_type(prefix, type, queries):
+#     update_queries = list(filter(lambda x: type in x['sql'], queries))
+#     print(f'db_profile {type} for {prefix}:')
+#     [print(query['sql']) for query in update_queries]
+
+
+@receiver(pre_save, sender=ProductCategory)
+def product_is_active_update_productcategory_save(sender, instance, **kwargs):
+    if instance.pk:
+        if instance.is_active:
+            instance.product_set.update(is_active=True)
+        else:
+            instance.product_set.update(is_active=False)
+
+        # db_profile_by_type(sender, 'UPDATE', connection.queries)
