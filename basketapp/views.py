@@ -35,7 +35,8 @@ def basket_add(request, pk):
     basket = Basket.objects.filter(user=request.user, product=product).first()
 
     if basket:
-        basket.quantity = F('quantity') + 1
+        # basket.quantity = F('quantity') + 1
+        basket.quantity += 1
     else:
         basket = Basket(user=request.user, product=product)
         basket.quantity += 1

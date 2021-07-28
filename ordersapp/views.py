@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import F
 from django.dispatch import receiver
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, HttpResponseRedirect
@@ -132,9 +133,11 @@ def forming_complete(request, pk):
 @receiver(pre_save, sender=OrderItem)
 def product_quantity_update_save(sender, update_fields, instance, **kwargs):
     if instance.pk:
-        instance.product.quantity -= instance.quantity - sender.get_item(instance.pk).quantity
+        instance.product.quantity = F('quantity') - (instance.quantity - sender.get_item(instance.pk).quantity)
+        # instance.product.quantity -= instance.quantity - sender.get_item(instance.pk).quantity
     else:
-        instance.product.quantity -= instance.quantity
+        instance.product.quantity = F('quantity') - instance.quantity
+        # instance.product.quantity -= instance.quantity
     instance.product.save()
 
 
