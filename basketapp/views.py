@@ -1,3 +1,4 @@
+from django.db.models import F
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, DeleteView, CreateView
@@ -33,10 +34,12 @@ def basket_add(request, pk):
     product = get_object_or_404(Product, pk=pk)
     basket = Basket.objects.filter(user=request.user, product=product).first()
 
-    if not basket:
+    if basket:
+        basket.quantity = F('quantity') + 1
+    else:
         basket = Basket(user=request.user, product=product)
+        basket.quantity += 1
 
-    basket.quantity += 1
     basket.save()
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
