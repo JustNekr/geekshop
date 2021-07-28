@@ -49,7 +49,7 @@
                         {% else %}
                             <form action="{% url 'admin_staff:product_delete' pk=object.id %}" method="post">
                                 {% csrf_token %}
-                                <input type="submit" class="btn btn-primary" style="width: 130px" value="Восстановить"><
+                                <input type="submit" class="btn btn-primary" style="width: 130px" value="Восстановить">
                             </form>
                         {% endif %}
                     </td>
