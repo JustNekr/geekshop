@@ -42,7 +42,7 @@ class TestUserManagement(TestCase):
         # self.assertEqual(response.context['user'], self.user)
         # # self.assertIn('Пользователь', response.content.decode())
         #
-        # # разлогиниваемся
-        # self.client.logout()
-        # response = self.client.get('/')
-        # self.assertTrue(response.context['user'].is_anonymous)
+        # разлогиниваемся
+        self.client.logout()
+        response = self.client.get('/')
+        self.assertTrue(response.context['user'].is_anonymous)
