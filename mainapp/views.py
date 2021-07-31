@@ -100,8 +100,17 @@ class ProductsView(ListView):
 
     def get_hot_product(self):
         products = get_products()
-        return random.sample(list(products), 1)[0]
+        if products:
+            return random.sample(list(products), 1)[0]
 #        return random.sample(list(self.get_queryset()), 1)[0]
+        else:
+            categories = ProductCategory.objects.all()
+            if categories:
+                product = Product.objects.create(name='default_prod', category=categories[0])
+            else:
+                category = ProductCategory.objects.create(name='default_cat')
+                product = Product.objects.create(name='default_prod', category=category)
+            return product
 
     def get_same_products(self, ):
         hot_product = self.get_hot_product()
