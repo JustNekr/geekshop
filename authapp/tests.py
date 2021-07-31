@@ -56,3 +56,22 @@ class TestUserManagement(TestCase):
         self.assertEqual(list(response.context['basket']), [])
         self.assertEqual(response.request['PATH_INFO'], '/basket/')
         # self.assertIn('Ваша корзина, Пользователь', response.content.decode())
+
+    def test_user_logout(self):
+        # данные пользователя
+        self.client.login(username=self.username, password=self.password)
+
+        # логинимся
+        response = self.client.get('/auth/login/')
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(response.context['user'].is_anonymous)
+
+        # выходим из системы
+        response = self.client.get('/auth/logout/')
+        self.assertEqual(response.status_code, 302)
+
+        # главная после выхода
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.context['user'].is_anonymous)
+
