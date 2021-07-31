@@ -135,5 +135,6 @@ class TestUserManagement(TestCase):
 
         response = self.client.post('/auth/register/', data=new_user_data)
         self.assertEqual(response.status_code, self.status_code_success)
-        self.assertFormError(response, 'register_form', 'age', 'Вы слишком молоды!')
+        print(response)
+        self.assertFormError(response, 'form', 'age', 'Вы слишком молоды!')
 
