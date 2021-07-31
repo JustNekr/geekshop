@@ -70,6 +70,8 @@ class TestUserManagement(TestCase):
         # логинимся
         response = self.client.get('/auth/login/')
         self.assertEqual(response.status_code, self.status_code_redirect)
+
+        response = self.client.get('/')
         self.assertFalse(response.context['user'].is_anonymous)
 
         # выходим из системы
@@ -113,6 +115,8 @@ class TestUserManagement(TestCase):
         # логинимся
         response = self.client.get('/auth/login/')
         self.assertEqual(response.status_code, self.status_code_redirect)
+
+        response = self.client.get('/')
         self.assertFalse(response.context['user'].is_anonymous)
 
         # проверяем главную страницу
