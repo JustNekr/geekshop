@@ -14,7 +14,6 @@ from django.urls import reverse, reverse_lazy
 from authapp.models import ShopUser
 
 
-@csrf_exempt
 def login(request):
     title = 'вход'
     login_form = ShopUserLoginForm(data=request.POST or None)
