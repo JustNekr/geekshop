@@ -32,17 +32,17 @@ class TestUserManagement(TestCase):
         self.client.login(username=self.username, password=self.password)
 
         # логинимся
-        response = self.client.get('/auth/login/')
+        response = self.client.get('/')
         self.assertFalse(response.context['user'].is_anonymous)
         self.assertEqual(response.context['user'], self.user)
 
-        # главная после логина
-        response = self.client.get('/')
-        self.assertContains(response, 'Пользователь', status_code=200)
-        self.assertEqual(response.context['user'], self.user)
-        # self.assertIn('Пользователь', response.content.decode())
-
-        # разлогиниваемся
-        self.client.logout()
-        response = self.client.get('/')
-        self.assertTrue(response.context['user'].is_anonymous)
+        # # главная после логина
+        # response = self.client.get('/')
+        # self.assertContains(response, 'Пользователь', status_code=200)
+        # self.assertEqual(response.context['user'], self.user)
+        # # self.assertIn('Пользователь', response.content.decode())
+        #
+        # # разлогиниваемся
+        # self.client.logout()
+        # response = self.client.get('/')
+        # self.assertTrue(response.context['user'].is_anonymous)
