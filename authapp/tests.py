@@ -35,7 +35,7 @@ class TestUserManagement(TestCase):
         # логинимся
         self.client.login(username=self.username, password=self.password)
 
-        response = self.client.get('auth/login/')
+        response = self.client.get('/auth/login/')
         self.assertEqual(response.status_code, self.status_code_redirect)
 
         response = self.client.get('/')
@@ -69,7 +69,7 @@ class TestUserManagement(TestCase):
 
         # логинимся
         response = self.client.get('/auth/login/')
-        self.assertEqual(response.status_code, self.status_code_success)
+        self.assertEqual(response.status_code, self.status_code_redirect)
         self.assertFalse(response.context['user'].is_anonymous)
 
         # выходим из системы
@@ -112,7 +112,7 @@ class TestUserManagement(TestCase):
 
         # логинимся
         response = self.client.get('/auth/login/')
-        self.assertEqual(response.status_code, self.status_code_success)
+        self.assertEqual(response.status_code, self.status_code_redirect)
         self.assertFalse(response.context['user'].is_anonymous)
 
         # проверяем главную страницу
