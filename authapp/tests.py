@@ -45,4 +45,4 @@ class TestUserManagement(TestCase):
         # разлогиниваемся
         self.client.logout()
         response = self.client.get('/')
-        self.assertEqual(response.context['user'].is_anonymous)
+        self.assertTrue(response.context['user'].is_anonymous)
