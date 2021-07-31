@@ -15,6 +15,9 @@ from authapp.models import ShopUser
 
 
 def login(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('index'))
+
     title = 'вход'
     login_form = ShopUserLoginForm(data=request.POST or None)
     next = request.GET['next'] if 'next' in request.GET.keys() else ''
@@ -43,7 +46,6 @@ def login(request):
 #     authentication_form = ShopUserLoginForm
 #     template_name = 'authapp/login.html'
 #     extra_context = {'title': 'вход'}
-
 
 
 class MyLogoutView(LogoutView):
