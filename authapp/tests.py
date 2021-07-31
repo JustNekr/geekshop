@@ -36,19 +36,23 @@ class TestUserManagement(TestCase):
         self.assertFalse(response.context['user'].is_anonymous)
         self.assertEqual(response.context['user'], self.user)
 
-        # # главная после логина
-        # response = self.client.get('/')
-        # self.assertContains(response, 'Пользователь', status_code=200)
-        # self.assertEqual(response.context['user'], self.user)
-        # # self.assertIn('Пользователь', response.content.decode())
-        #
-        # разлогиниваемся
-        # self.client.logout()
-        response = self.client.get('/auth/logout/')
-        self.assertEqual(response.status_code, 302)
-        self.assertTrue(response.context['user'].is_anonymous)
-
+        # главная после логина
         response = self.client.get('/')
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue(response.context['user'].is_anonymous)
+        self.assertContains(response, 'Пользователь', status_code=200)
+        self.assertEqual(response.context['user'], self.user)
+        # self.assertIn('Пользователь', response.content.decode())
 
+    def test_basket_login_redirect(self):
+        # без логина должен переадресовать
+        response = self.client.get('/basket/')
+        self.assertEqual(response.url, '/auth/login/?next=/basket/')
+        self.assertEqual(response.status_code, 302)
+
+        # с логином все должно быть хорошо
+        self.client.login(username=self.username, password=self.password)
+
+        response = self.client.get('/basket/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(list(response.context['basket']), [])
+        self.assertEqual(response.request['PATH_INFO'], '/basket/')
+        self.assertIn('Ваша корзина, Пользователь', response.content.decode())
