@@ -6,8 +6,15 @@ from django.core.management import call_command
 
 class TestMainappSmoke(TestCase):
     def setUp(self):
-        call_command('flush', '--noinput')
-        call_command('loaddata', 'test_db.json')
+        cat_1 = ProductCategory.objects.create(
+            name='cat_1'
+        )
+        Product.objects.create(
+            category=cat_1,
+            name='prod_1'
+        )
+        # call_command('flush', '--noinput')
+        # call_command('loaddata', 'test_db.json')
         self.client = Client()
 
     def test_mainapp_urls(self):
