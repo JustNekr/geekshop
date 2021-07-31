@@ -5,17 +5,19 @@ from django.core.management import call_command
 
 
 class TestUserManagement(TestCase):
+    username = 'tarantino'
+    email = 'django2@tarantino.local'
+    password = 'geekbrains'
+    super_username = 'django2'
+    super_email = 'django2@geekshop.local'
+    super_password = 'geekbrains'
+
     def setUp(self):
         # call_command('flush', '--noinput')
         # call_command('loaddata', 'test_db.json')
         self.client = Client()
-
-        self.superuser = ShopUser.objects.create_superuser('django2', 'django2@geekshop.local', 'geekbrains')
-
-        self.user = ShopUser.objects.create_user('tarantino', 'tarantino@geekshop.local', 'geekbrains')
-
-        # self.user_with__first_name = ShopUser.objects.create_user('umaturman', 'umaturman@geekshop.local',
-        #                                                           'geekbrains', first_name='Ума')
+        self.superuser = ShopUser.objects.create_superuser(self.super_username, self.super_email, self.super_password)
+        self.user = ShopUser.objects.create_user(self.username, self.email, self.password)
 
     def test_user_login(self):
         # главная без логина
@@ -27,7 +29,7 @@ class TestUserManagement(TestCase):
         # self.assertNotIn('Пользователь', response.content.decode())
 
         # данные пользователя
-        self.client.login(username='tarantino', password='geekbrains')
+        self.client.login(username=self.username, password=self.password)
 
         # логинимся
         response = self.client.get('/auth/login/')
@@ -39,3 +41,8 @@ class TestUserManagement(TestCase):
         self.assertContains(response, 'Пользователь', status_code=200)
         self.assertEqual(response.context['user'], self.user)
         # self.assertIn('Пользователь', response.content.decode())
+
+        # разлогиниваемся
+        self.client.logout()
+        response = self.client.get('/')
+        self.assertEqual(response.context['user'].is_anonymous)
