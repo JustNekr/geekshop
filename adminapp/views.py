@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import user_passes_test
 from django.db import connection
+from django.db.models import F
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.shortcuts import HttpResponseRedirect
@@ -93,15 +94,25 @@ class CategoryUpdateView(DispatchMixin, UpdateView):
     model = ProductCategory
     template_name = 'adminapp/category_update.html'
     success_url = reverse_lazy('admin_staff:categories')
-    fields = '__all__'
+    form_class = ProductCategoryEditForm
+    # fields = '__all__'
     extra_context = {'title': 'категории/редактирование'}
 
-    def get_form(self, form_class=None):
-        form = super().get_form()
-        for field_name, field in form.fields.items():
-            if not field_name.startswith('is_'):
-                field.widget.attrs['class'] = 'form-control'
-        return form
+    def form_valid(self, form):
+        if 'discount' in form.cleaned_data:
+            discount = form.cleaned_data['discount']
+            if discount:
+                print(self.object.product)
+                self.object.product_set.update(price=F('price') * (1 - discount / 100))
+                # db_profile_by_type(self.__class__, 'UPDATE', connection.queries)
+        return super().form_valid(form)
+
+    # def get_form(self, form_class=None):
+    #     form = super().get_form()
+    #     for field_name, field in form.fields.items():
+    #         if not field_name.startswith('is_'):
+    #             field.widget.attrs['class'] = 'form-control'
+    #     return form
 
 
 class CategoryDeleteView(DeleteView):
