@@ -46,6 +46,7 @@ class TestUserManagement(TestCase):
         # self.client.logout()
         response = self.client.get('/auth/logout/')
         self.assertEqual(response.status_code, 302)
+        self.assertTrue(response.context['user'].is_anonymous)
 
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
